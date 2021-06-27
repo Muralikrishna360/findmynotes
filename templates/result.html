@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search_result</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid" id="bod">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" >
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">FindYourBook</a>
+
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse " id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_book' %}"><i class="fas fa-upload"></i> Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="download"><i class="fas fa-download"></i>Download</a>
+          </li>
+          <li>
+              <form class="form-inline" action="search">
+                 <input class="form-control mr-sm-2" type="search" placeholder="college subject topic.." name="sea">
+                 <button class="btn btn-success" type="submit">Search</button>
+              </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+</div>
+<hr>
+<div class="container-fluid" style="margin-top:100px;">
+    <h5 class="text-info">{{cou}} files matched to your search</h5>
+    <p class="text-info">You can search by any one of the field for better result </p>
+    <p class="text-danger">Please enter in smaller letters for better search and to avoid bad search !</p>
+    <img src="https://learndashcom.lightningbasecdn.com/wp-content/uploads/elearning-wordpress.png" style="width:40%">
+<hr>
+</div>
+<h3>Related search values<span class="badge badge-primary">{{cou}}</span></h3>
+<h3>Total files <span class="badge badge-primary">{{count}}</span></h3>
+<div class="container">
+    <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th>College</th>
+            <th>Department</th>
+            <th>Subject</th>
+            <th>Topic</th>
+            <th>semister</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+
+                  {% for gos in god %}
+                  <tr>
+                    <td>{{gos.college}}</td>
+                    <td>{{gos.department}}</td>
+                    <td>{{gos.subject}}</td>
+                    <td>{{gos.topic}}</td>
+                    <td>{{gos.semister}}</td>
+                    <td><a href='{{ gos.notesfile.url}}' download><img src="http://icons.iconarchive.com/icons/bokehlicia/captiva/256/software-download-icon.png" style="width:30%"></a> </td>
+                  </tr>
+                  {% endfor %}
+        </tbody>
+  </table>
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+  <a class="btn btn-primary" href="/" >Goback</a>
+</div>
+</body>
+</html>

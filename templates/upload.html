@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload_files</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<style>
+</style>
+<body>
+<div class="container-fluid" id="bod">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" >
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">FindYourBook</a>
+
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse " id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_book' %}"><i class="fas fa-upload"></i> Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="download"><i class="fas fa-download"></i> Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="report"><i class="fas fa-exclamation-triangle"></i>Report</a>
+          </li>
+            {% load social_share %}
+          <li class="nav-item">
+            <h5>{% post_to_whatsapp "https://limitless-badlands-05876.herokuapp.com/" "Share" %}</h5>
+          </li>
+        </ul>
+      </div>
+    </nav>
+</div>
+
+<hr>
+<h1 class="text-info d-flex align-items-center justify-content-center" style="margin-top:50px;"><u>Upload a Notes</u></h1>
+<p class="text-danger">Please provide full details of the file with regular words</p>
+<div class="container-fluid">
+            {% include 'messages.html' %}
+            <form method="post" enctype="multipart/form-data" id="upload-form">
+                <table class="table table-dark table-hover">
+                    {{ form.as_table }}
+                </table>
+                <div class="form-group d-flex  justify-content-center align-items-center">
+                        {% csrf_token %}
+
+                        <button class="btn btn-primary ml-auto d-flex justify-content-center align-items-center">Save</button>
+
+                </div>
+            </form>
+            <div id="progress-box" class="not-visible">progress</div>
+            <div id="cancel-box" class="not-visible">
+              <button id="cancel-btn" class="btn btn-danger">cancel</button>
+            </div>
+           <div class="container-fluid d-flex justify-content-center align-items-center">
+             <a class="btn btn-primary" href="/" >Goback</a>
+           </div>
+</div>
+</body>
+</html>
